@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<%- include('./partials/head') %>
+<body>
+  <%- include('./partials/header')%>
+  <section class="our_section layout_padding">
+      <% helados.forEach((helado)=>{ %>
+      <div class="d-inline">
+        <article class="d-inline-block text-black text-center p-0 m-0" style="width: 33%;height:10% ;background-color:#6c757d; border-radius: 5px;">
+          <a class="text-dark" href="/productos/<%= helado.id %>">
+              <img src="/images/<%= helado.imagen %>">
+              <p class="productName"><%= helado.nombre %></p>
+              <p class="productPrice"><%= 'AR$ ' + helado.precio %></p>
+          </a>
+        </article>
+      </div>
+      <% }) %>
+  </section>
+  <%- include('./partials/footer')%>
+</body>
+</html>

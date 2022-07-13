@@ -1,28 +1,30 @@
+const db = require('../database/models');
+
 const indexController = {
-    index:function(req, res, next) {
+    index:function(req, res) {
         res.render('index');
-      },
-      
-      productList: (req, res) => {
-        res.render('productList');
+    },
 
-        },
-        createForm: (req, res) => {
-         res.render('createForm');
-        },
+    productList: (req, res) => {
+        db.Producto.findAll().then((helados)=>{
+            res.render('listaHelados.ejs',{helados});  
+        })
+    },
 
-         editForm: (req, res) => {
-            res.render('editForm');
-         },
-        
-        detailForm: (req, res) => {
-            res.render('detailForm')
-        },
-        
-        delete: (req, res) => {
-            res.render('delete')
-        },
+    createForm: (req, res) => {
+        res.render('createForm');
+    },
 
+    editForm: (req, res) => {
+        res.render('editForm');
+    },
+
+    detailForm: (req, res) => {
+        console.log('asd');
+        db.Producto.findByPk(req.params.id).then((helado)=>{
+            res.render('details.ejs',{helado})    
+        })
+    },
 }
 
 module.exports=indexController

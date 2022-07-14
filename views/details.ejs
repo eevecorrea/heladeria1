@@ -4,12 +4,14 @@
 <body>
   <%- include('./partials/header')%>
   <section class="our_section layout_padding">
-  <article>
+  <article class="text-center pb-4">
       <img src="/images/<%= helado.imagen%>">
-      <span><%= helado.imagen%></span>
-      <span><%= helado.imagen%></span>
-      <span><%= helado.imagen%></span>
+      <div class="d-inline-block">
+        <h2><%= helado.nombre %></h2>
+        <span>Precio de este helado : $<%= helado.precio%></span>
+      </div>
   </article>
+  <a class="text-white" href="/products/edit/<%= helado.id %>"><button class="btn btn-primary w-100" style="height:60px;">Editar helado</button></a>
   </section>
   <%- include('./partials/footer')%>
 </body>

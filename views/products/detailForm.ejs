@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<%- include('../partials/head') %>
+    <body>
+        <%- include('../partials/header')%>
+        <form style="padding-top: 100px;padding-bottom: 100px;" action="/" method="POST">
+            <h1 style="padding-bottom: 10px;">Formulario de edicion</h1>
+            <label for="nombre">Nombre:</label>
+            <input id="nombre" type="text" name="nombre" value="<%=helado.nombre%>" required>
+            <br>
+            <label for="precio">Precio:</label>
+            <input id="precio" type="text" name="precio" value="<%=helado.precio%>" required>
+            <br>
+            <label for="image">Imagen:</label>
+            <input id="image" type="file" name="image" value="<%=helado.imagen%>">
+            <br>
+            <label for="">Categoria:</label>
+            <select name="categoria">
+                <% categorias.forEach((categoria)=>{%>
+                    <option value="<%= categoria.id %>"><%= categoria.nombre %></option>
+                <% }) %>
+            </select>
+            <br>
+            <button type="submit" style="color:red" class="btn btn-primary" formaction="/products/edit/<%= helado.id %>" formmethod="post" >
+               modificar
+            </button>
+            <br>
+            <br>
+            <button type="submit" style="color:red" class="btn btn-primary" formaction="/products/delete/<%= helado.id %>" formmethod="post">
+                borrar
+            </button>
+        </form>
+        <%- include('../partials/footer')%>
+    </body>
+</html>

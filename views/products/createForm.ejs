@@ -3,7 +3,7 @@
 <%- include('../partials/head') %>
     <body>
         <%- include('../partials/header')%>
-        <form style="padding-top: 100px;padding-bottom: 100px;" action="/products/create" method="POST">
+        <form style="padding-top: 100px;padding-bottom: 100px;" action="/products/create" method="POST" enctype="multipart/form-data">
             <label for="nombre">Nombre:</label>
             <input id="nombre" type="text" name="nombre" required>
             <br>
@@ -16,8 +16,8 @@
             <label for="">Categoria:</label>
             <select name="categoria">
                 <option value="1">cremas</option>
-                <option value="1">frutales</option>
-                <option value="1">especiales</option>
+                <option value="3">frutales</option>
+                <option value="2">especiales</option>
             </select>
             <br>
             <button type="submit">

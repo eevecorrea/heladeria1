@@ -1,7 +1,7 @@
 
 const db = require("../database/models");
-const sequelize=db.sequelize;
-const {validationResult, body}=require("express-validator")
+const sequelize = db.sequelize;
+const { validationResult, body } = require("express-validator")
 
 const indexController = {
     index: function (req, res) {
@@ -21,23 +21,26 @@ const indexController = {
         const errors = validationResult(req);
         console.log(errors)
         if (!errors.isEmpty()) {
-          return res.render("products/createForm", {
-            errors: errors.errors,
-            product:req.body
-          });
+            return res.render("products/createForm", {
+                errors: errors.errors,
+                product: req.body
+            });
+        } else {
+            let helado = db.Producto.create({
+                nombre: req.body.nombre,
+                precio: req.body.precio,
+                imagen: req.file.filename,
+                categoria_id: req.body.categoria
+            })
+            Promise.all([helado])
+            .then(()=>{res.render("index")})
+            
         }
-        /*let helado = db.productos.create({
-            nombre: req.body.nombre,
-            precio: req.body.precio,
-            imagen: req.file.filename,
-            categoria_id: req.body.categoria
-        })*/
-
     },
     editForm: (req, res) => {
         db.Producto.findByPk(req.params.id).then((helado) => {
             let id = req.params.id
-            db.Categoria.findAll().then((categorias)=>{
+            db.Categoria.findAll().then((categorias) => {
                 res.render('products/editForm', { helado, categorias, id });
             })
         })
@@ -50,20 +53,20 @@ const indexController = {
             precio: req.body.precio,
             //imagen: req.file.filename,
             //categoria_id: req.body.categoria
-            },
+        },
             {
-               where:{
-                id:idParams
-               }
+                where: {
+                    id: idParams
+                }
             }
-        ).catch((e)=>{
+        ).catch((e) => {
             console.log(e);
         });
     },
     deleteProduct: (req, res) => {
         let idParams = req.params.id
-        db.Producto.destroy({ 
-            where:{ id: idParams }
+        db.Producto.destroy({
+            where: { id: idParams }
         });
         res.redirect("/")
     },

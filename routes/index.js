@@ -1,3 +1,4 @@
+const path= require("path");
 var express = require('express');
 var router = express.Router();
 var indexController = require('../controllers/indexController');
@@ -28,7 +29,7 @@ router.get("/productos", indexController.productList);
 router.get("/productos/:id", indexController.detailForm);
 
 router.get("/products/create",createValidator, indexController.createForm);
-router.post("/products/create",upload.single('image') ,createValidator, indexController.createProduct);
+router.post("/products/create",upload.single('image'),createValidator,indexController.createProduct);
 //router.post("/products/create", upload.single("imagen"), productsValidator, indexController.create);
 
 
